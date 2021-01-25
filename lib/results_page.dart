@@ -34,7 +34,7 @@ class ResultsPage extends StatelessWidget {
                   ),
                   Center(
                     child: Text(
-                      'You have a normal body weight.\nGood job!',
+                      'You have a normal body weight.\nGoood job!',
                       textAlign: TextAlign.center,
                       style: kResultCommentStyle,
                     ),
