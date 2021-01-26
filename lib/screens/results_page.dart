@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'constants.dart';
-import 'reusable_card.dart';
+import '../constants.dart';
+import '../components/reusable_card.dart';
+import 'package:bmi_calculator/components/bottom_button.dart';
 
 class ResultsPage extends StatelessWidget {
+  ResultsPage({@required this.interpretation, @required this.bmiResult, @required this.resultText});
+
+  final String bmiResult;
+  final String resultText;
+  final String interpretation;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,29 +19,35 @@ class ResultsPage extends StatelessWidget {
         title: Center(child: Text('BMI CALCULATOR')),
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           Expanded(
+            child: Container(
+              child: Text(
+                'Your Result',
+                style: kResultLabelStyle,
+              ),
+              margin: EdgeInsets.only(top: 20.0),
+            ),
+          ),
+          Expanded(
+            flex: 4,
             child: ReusableCard(
               colour: kActiveCardColour,
               cardChild: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Text(
-                    'Your Result',
-                    style: kResultLabelStyle,
-                  ),
-                  Text(
-                    'NORMAL',
+                    resultText.toUpperCase(),
                     style: kResultLevel,
                   ),
                   Text(
-                    '19,2',
+                    bmiResult,
                     style: kResultNumbers,
                   ),
                   Center(
                     child: Text(
-                      'You have a normal body weight.\nGoood job!',
+                      interpretation,
                       textAlign: TextAlign.center,
                       style: kResultCommentStyle,
                     ),
@@ -43,22 +56,11 @@ class ResultsPage extends StatelessWidget {
               ),
             ),
           ),
-          GestureDetector(
+          BottomButton(
+            buttonTitle: 'RE-CALCULATE',
             onTap: () {
               Navigator.pop(context);
             },
-            child: Container(
-              child: Center(
-                child: Text(
-                  'RE-CALCULATE',
-                  style: kResultTextStyle,
-                ),
-              ),
-              color: kBottomContainerColor,
-              margin: EdgeInsets.only(top: 10.0),
-              width: double.infinity,
-              height: kBottomContainerHeight,
-            ),
           ),
         ],
       ),

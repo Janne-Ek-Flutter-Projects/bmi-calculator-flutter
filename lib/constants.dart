@@ -17,14 +17,14 @@ const kResultCommentStyle = TextStyle(
 );
 
 const kResultLevel = TextStyle(
-  fontSize: 22.0,
-  color: Color(0xffffffff),
-  fontWeight: FontWeight.w500,
+  fontSize: 24.0,
+  color: Colors.lightGreen,
+  fontWeight: FontWeight.bold,
 );
 
 const kResultLabelStyle = TextStyle(
-  fontSize: 40.0,
-  color: Color(0xffffffff),
+  fontSize: 55.0,
+  color: Color(0xffeb1555),
   fontWeight: FontWeight.w900,
 );
 

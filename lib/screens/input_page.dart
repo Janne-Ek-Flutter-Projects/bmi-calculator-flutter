@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'reusable_card.dart';
-import 'icon_content.dart';
-import 'constants.dart';
+import '../components/reusable_card.dart';
+import '../components/icon_content.dart';
+import '../constants.dart';
 import 'results_page.dart';
+import '../components/bottom_button.dart';
+import '../components/round_icon_button.dart';
+import 'package:bmi_calculator/calculator_brain.dart';
 
 enum Gender {
   male,
@@ -203,47 +206,25 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          GestureDetector(
+          BottomButton(
+            buttonTitle: 'CALCULATE',
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ResultsPage()));
-            },
-            child: Container(
-              child: Center(
-                child: Text(
-                  'CALCULATE',
-                  style: kResultTextStyle,
+              CalculatorBrain calc = CalculatorBrain(height: height, weight: weight);
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultsPage(
+                    bmiResult: calc.calculateBMI(),
+                    resultText: calc.getResult(),
+                    interpretation: calc.getInterpretation(),
+                  ),
                 ),
-              ),
-              color: kBottomContainerColor,
-              margin: EdgeInsets.only(top: 10.0),
-              width: double.infinity,
-              height: kBottomContainerHeight,
-            ),
+              );
+            },
           ),
         ],
       ),
-    );
-  }
-}
-
-class RoundIconButton extends StatelessWidget {
-  RoundIconButton({@required this.icon, @required this.onPressed});
-
-  final IconData icon;
-  final Function onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      child: Icon(icon),
-      onPressed: onPressed,
-      elevation: 0.0,
-      constraints: BoxConstraints.tightFor(
-        width: 45.0,
-        height: 45.0,
-      ),
-      shape: CircleBorder(),
-      fillColor: Color(0xff4c4f5e),
     );
   }
 }
